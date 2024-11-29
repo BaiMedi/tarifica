@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Tarifas para Asistentes Virtuales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            text-align: center;
+            font-size: 1.2em;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calcula tu Tarifa</h1>
+        <form id="tariffForm">
+            <label for="hours">Horas de trabajo por semana:</label>
+            <input type="number" id="hours" name="hours" min="1" required>
+
+            <label for="rate">Valor por hora (USD):</label>
+            <input type="number" id="rate" name="rate" min="1" required>
+
+            <button type="button" onclick="calculateTariff()">Calcular</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateTariff() {
+            const hours = parseFloat(document.getElementById('hours').value);
+            const rate = parseFloat(document.getElementById('rate').value);
+
+            if (!isNaN(hours) && !isNaN(rate)) {
+                const weeklyIncome = hours * rate;
+                const monthlyIncome = weeklyIncome * 4;
+
+                document.getElementById('result').innerHTML = `
+                    <p>Ingresos Semanales: <strong>$${weeklyIncome.toFixed(2)}</strong></p>
+                    <p>Ingresos Mensuales: <strong>$${monthlyIncome.toFixed(2)}</strong></p>
+                `;
+            } else {
+                document.getElementById('result').innerHTML = `
+                    <p style="color: red;">Por favor, ingresa valores válidos.</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
